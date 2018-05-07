@@ -4,12 +4,15 @@ library(shinythemes)
 library(lubridate)
 library(DT)
 library(shinyjs)
+library(plotly)
 ##shiny options
 options(shiny.reactlog= T) #usage:showReactiveLog
 options(shiny.browser = T)
 
 #load data
 movies<-readRDS('data/movies.rds')
+movies$`总票房（万）`<-as.numeric(movies$`总票房（万）`)
+movies$豆瓣评分<-as.numeric(movies$豆瓣评分)
 
 #select input data
 area <- as.character(unique(movies$地区))

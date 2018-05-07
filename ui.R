@@ -17,7 +17,7 @@ ui <- fluidPage(
         '豆瓣评分',
         min = 0,
         max = 10,
-        value = 6
+        value = 0
       ),
       dateRangeInput(
         'daterange',
@@ -35,9 +35,19 @@ ui <- fluidPage(
     mainPanel(tabsetPanel(
       tabPanel(title = '电影信息',
                DT::dataTableOutput('dt_movies')),
-      tabPanel(title = '口碑vs票房',
-               plotOutput('plot_vs')),
-      tabPanel(title = '分析')
+      tabPanel(title = '散点图',
+               radioButtons('plot_select',
+                            label = '请选择：',
+                            choices = c('类型','地区'),
+                            selected = '类型',inline = T),
+               plotlyOutput('plotly_by_selecet')),
+      tabPanel(title = '评分VS票房(线性回归分析)',
+               radioButtons('analysis_select',
+                            label = '请选择',
+                            choices = c('动图',
+                                        '全部',
+                                        '按年份')),
+               plotlyOutput('plotly_analysis'))
       
     ))
   )
